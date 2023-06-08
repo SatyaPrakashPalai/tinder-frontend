@@ -1,0 +1,25 @@
+.button-wrapper{
+    display: flex;
+    align-items: center;
+    height: 45px;
+    background-color: #1A73E8;
+    width: 100%;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.icon-wrapper{
+    display: flex;
+    align-items: center ;
+    background-color: white;
+    /* width: 30px; */
+    border-radius: 100%;
+    margin-left: 4px;
+}
+.google-icon{
+    width: 35px;
+}
+.button-text{
+    color:white;
+    text-align: center;
+    width: 100%;
+}

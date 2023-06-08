@@ -1,0 +1,20 @@
+.chat-display{
+    padding: 20px;
+    overflow-y: auto;
+    height: 100%; 
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.chat-input{
+    padding: 20px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+.img-container{
+    height: 35px;
+    width: 35px;
+    border-radius:15px;
+    overflow: hidden;
+    margin: 10px;
+}
