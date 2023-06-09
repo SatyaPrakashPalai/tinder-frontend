@@ -24,11 +24,11 @@ function ChatHeader({ user }) {
         <div className={styles["img-container"]}>
           <img
             style={{ width: "100%" }}
-            src={user.url}
-            alt={"photo of " + user.first_name}
+            src={user?.url}
+            alt={"photo of " + user?.first_name}
           />
         </div>
-        <h3>{user.first_name}</h3>
+        <h3>{user?.first_name}</h3>
       </div>
       <IconButton onClick={logout}>
         <ExitToAppIcon fontSize="large" />

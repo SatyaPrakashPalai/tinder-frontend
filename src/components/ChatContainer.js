@@ -3,12 +3,19 @@ import styles from "./chat-container.module.css";
 import ChatHeader from "./ChatHeader";
 import MatchesDisplay from "./MatchesDisplay";
 import ChatDisplay from "./ChatDisplay";
+import InboxDisplay from "./InboxDisplay";
 
 function ChatContainer({ user }) {
   const [clickedUser, setClickedUser] = useState(null);
+  const [display, setDisplay] = useState(false);
 
   const handleMatch = () => {
     setClickedUser(null);
+    setDisplay(false);
+  };
+
+  const handleInbox = () => {
+    setDisplay(!display);
   };
   // console.log(clickedUser);
 
@@ -22,16 +29,22 @@ function ChatContainer({ user }) {
         <button className={styles["option"]} disabled={!clickedUser}>
           Chat
         </button>
+        <button className={styles["option"]} onClick={handleInbox}>
+          Inbox
+        </button>
       </div>
 
-      {!clickedUser && (
+      {!display && !clickedUser && (
         <MatchesDisplay
-          matches={user.matches}
+          matches={user?.matches}
           setClickedUser={setClickedUser}
         />
       )}
 
-      {clickedUser && <ChatDisplay user={user} clickedUser={clickedUser} />}
+      {!display && clickedUser && (
+        <ChatDisplay user={user} clickedUser={clickedUser} />
+      )}
+      {display && <InboxDisplay />}
     </div>
   );
 }

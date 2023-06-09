@@ -1,8 +1,14 @@
-.matches-display{
-    /* display: flex; */
+.inbox-display{
+    
+
     height: 100%;
     width: 100%;
 }
+/* .matches-display{
+    display: flex;
+    height: 100%;
+    width: 100%;
+} */
 .match-card{
     display: flex;
     justify-content: flex-start;

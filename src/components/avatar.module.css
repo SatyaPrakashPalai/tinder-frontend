@@ -1,0 +1,28 @@
+.text-container{
+    height: 35px;
+    width: 35px;
+    border-radius:15px;
+    overflow: hidden;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: orangered; */
+}
+.img-container{
+    height: 35px;
+    width: 35px;
+    border-radius:15px;
+    overflow: hidden;
+    margin: 10px;
+}
+.text{
+    text-align: center;
+    /* width: 100%; */
+}
+.match-card{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;   
+}

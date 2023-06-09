@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./matches-display.module.css";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import Avatar from "./Avatar";
 
 function MatchesDisplay({ matches, setClickedUser }) {
   const [matchedProfiles, setMatchedProfiles] = useState(null);
-  const matchedUserIds = matches.map(({ user_id }) => user_id);
+  const matchedUserIds = matches?.map(({ user_id }) => user_id);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const userId = cookies.UserId;
 
@@ -41,10 +42,7 @@ function MatchesDisplay({ matches, setClickedUser }) {
           className={styles["match-card"]}
           onClick={() => setClickedUser(match)}
         >
-          <div className={styles["img-container"]}>
-            <img src={match?.url} alt={match?.first_name + "profile"} />
-          </div>
-          <h3>{match?.first_name}</h3>
+          <Avatar user={match} />
         </div>
       ))}
     </div>

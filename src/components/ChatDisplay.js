@@ -48,8 +48,8 @@ function ChatDisplay({ user, clickedUser }) {
 
   usersMessages?.forEach((message) => {
     const formattedMessage = {};
-    formattedMessage["name"] = user?.first_name;
-    formattedMessage["img"] = user?.url;
+    formattedMessage["first_name"] = user?.first_name;
+    formattedMessage["url"] = user?.url;
     formattedMessage["message"] = message.message;
     formattedMessage["timestamp"] = message.timestamp;
     messages.push(formattedMessage);
@@ -57,8 +57,8 @@ function ChatDisplay({ user, clickedUser }) {
 
   clickedUsersMessages?.forEach((message) => {
     const formattedMessage = {};
-    formattedMessage["name"] = clickedUser?.first_name;
-    formattedMessage["img"] = clickedUser?.url;
+    formattedMessage["first_name"] = clickedUser?.first_name;
+    formattedMessage["url"] = clickedUser?.url;
     formattedMessage["message"] = message.message;
     formattedMessage["timestamp"] = message.timestamp;
     messages.push(formattedMessage);

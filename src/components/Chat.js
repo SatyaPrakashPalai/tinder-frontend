@@ -1,22 +1,14 @@
 import React from "react";
 import styles from "./chat-display.module.css";
+import Avatar from "./Avatar";
 
-function Chat({ descendingOrderMessages }) {
+function Chat({ user, descendingOrderMessages }) {
   return (
     <div className={styles["chat-display"]}>
       {descendingOrderMessages?.map((message, _index) => {
         return (
-          <div key={_index}>
-            <div className={styles["chat-message-header"]}>
-              <div className={styles["img-container"]}>
-                <img
-                  style={{ width: "100%" }}
-                  src={message.img}
-                  alt={message.first_name + "profile"}
-                />
-              </div>
-              <p>{message.name}</p>
-            </div>
+          <div key={_index} className={styles["message-card"]}>
+            <Avatar user={message} />
             <p>{message.message}</p>
           </div>
         );
