@@ -28,12 +28,9 @@ function OnBoarding() {
     e.preventDefault();
     console.log("submiited");
     try {
-      const response = await axios.put(
-        "https://tinder-server.vercel.app/users",
-        {
-          formData,
-        }
-      );
+      const response = await axios.put("http://localhost:8000/users", {
+        formData,
+      });
       console.log(response);
 
       const success = response.status === 200;

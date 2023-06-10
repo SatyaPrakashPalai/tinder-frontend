@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import authLogo from "../images/tinder_logo.png";
 import GoogleButton from "./GoogleButton";
 
-function AuthModal({ setShowModal, newUser,isSignUp }) {
+function AuthModal({ setShowModal, newUser, isSignUp }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
@@ -38,7 +38,7 @@ function AuthModal({ setShowModal, newUser,isSignUp }) {
               By clicking Log In, you agree to our Terms. Learn ow we process
               your data in our Privacy Policy and Cookie Policy.
             </p>
-            <GoogleButton isSignUp={isSignUp}/>
+            <GoogleButton />
           </div>
         </div>
       </div>
