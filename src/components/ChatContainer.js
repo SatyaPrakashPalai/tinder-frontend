@@ -5,17 +5,19 @@ import MatchesDisplay from "./MatchesDisplay";
 import ChatDisplay from "./ChatDisplay";
 import InboxDisplay from "./InboxDisplay";
 
-function ChatContainer({ user }) {
+function ChatContainer({ user, getUser }) {
   const [clickedUser, setClickedUser] = useState(null);
   const [display, setDisplay] = useState(false);
 
   const handleMatch = () => {
     setClickedUser(null);
     setDisplay(false);
+    getUser();
   };
 
   const handleInbox = () => {
     setDisplay(!display);
+    getUser();
   };
   // console.log(clickedUser);
 
@@ -44,7 +46,9 @@ function ChatContainer({ user }) {
       {!display && clickedUser && (
         <ChatDisplay user={user} clickedUser={clickedUser} />
       )}
-      {display && <InboxDisplay />}
+      {display && (
+        <InboxDisplay friends={user?.friend_requests} getUser={getUser} />
+      )}
     </div>
   );
 }

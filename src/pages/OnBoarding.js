@@ -21,22 +21,24 @@ function OnBoarding() {
     about: "",
     url: "",
     matches: [],
+    friend_requests: [],
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submiited");
     try {
-      const response = await axios.put(
-        "https://tinder-server.vercel.app/users",
-        {
-          formData,
-        }
-      );
+      const response = await axios.put("http://localhost:8000/users", {
+        formData,
+      });
       console.log(response);
 
       const success = response.status === 200;
-      if (success) navigate("/");
+      if (success) {
+        setTimeout(() => {
+          navigate("/");
+        }, 500); // Adjust the delay as needed
+      }
     } catch (error) {
       console.log(error);
     }
@@ -197,7 +199,11 @@ function OnBoarding() {
             />
             <div className={styles["photo-container"]}>
               {formData.url && (
-                <img src={formData.url} alt="profile pic preview" />
+                <img
+                  style={{ width: "100%" }}
+                  src={formData.url}
+                  alt="profile pic preview"
+                />
               )}
             </div>
           </section>

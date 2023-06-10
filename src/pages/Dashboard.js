@@ -18,25 +18,11 @@ function Dashboard() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const userId = cookies.UserId;
 
-  useEffect(() => {
-    async function getPersons() {
-      const peopleCol = collection(db, "people");
-      const peopleSnapshot = await getDocs(peopleCol);
-      const peopleList = peopleSnapshot.docs.map((doc) => doc.data());
-      setPeople(peopleList);
-    }
-
-    getPersons();
-  }, []);
-
   const getUser = async () => {
     try {
-      const response = await axios.get(
-        "https://tinder-server.vercel.app/user",
-        {
-          params: { userId },
-        }
-      );
+      const response = await axios.get("http://localhost:8000/user", {
+        params: { userId },
+      });
       setUser(response.data);
     } catch (error) {
       console.log(error);
@@ -45,12 +31,9 @@ function Dashboard() {
 
   const getGenderedUsers = async () => {
     try {
-      const response = await axios.get(
-        "https://tinder-server.vercel.app/gendered-users",
-        {
-          params: { gender: user?.gender_interest },
-        }
-      );
+      const response = await axios.get("http://localhost:8000/gendered-users", {
+        params: { gender: user?.gender_interest },
+      });
 
       setGenderedUsers(response.data);
     } catch (error) {
@@ -65,9 +48,9 @@ function Dashboard() {
     getGenderedUsers();
   }, [user]);
 
-  const updateMatches = async (matchedUserId) => {
+  const addFriend = async (matchedUserId) => {
     try {
-      await axios.put("https://tinder-server.vercel.app/addmatch", {
+      await axios.put("http://localhost:8000/addfriend", {
         userId,
         matchedUserId,
       });
@@ -79,7 +62,8 @@ function Dashboard() {
 
   const swiped = (direction, swipedUserId) => {
     if (direction === "right") {
-      updateMatches(swipedUserId);
+      addFriend(swipedUserId);
+      getUser();
     }
     setLastDirection(direction);
   };
@@ -89,7 +73,7 @@ function Dashboard() {
   };
 
   const matchedUserIds = user?.matches
-    .map(({ user_id }) => user_id)
+    ?.map(({ user_id }) => user_id)
     .concat(userId);
 
   const filteredGenderedUsers = genderedUsers?.filter(
@@ -109,7 +93,7 @@ function Dashboard() {
           <Header />
 
           <div style={{ display: "flex", height: "100%" }}>
-            <ChatContainer user={user} />
+            <ChatContainer user={user} getUser={getUser} />
             <div style={{ width: "100%" }}>
               {/* <p>you swiped {lastDirection}</p> */}
               <div className="tinder__cardContainer">

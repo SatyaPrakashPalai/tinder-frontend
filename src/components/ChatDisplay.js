@@ -11,12 +11,9 @@ function ChatDisplay({ user, clickedUser }) {
 
   const getUsersMessages = async () => {
     try {
-      const response = await axios.get(
-        "https://tinder-server.vercel.app/messages",
-        {
-          params: { userId: userId, correspondingUserId: clickedUserId },
-        }
-      );
+      const response = await axios.get("http://localhost:8000/messages", {
+        params: { userId: userId, correspondingUserId: clickedUserId },
+      });
       setUsersMessages(response.data);
     } catch (error) {
       console.log(error);
@@ -24,12 +21,9 @@ function ChatDisplay({ user, clickedUser }) {
   };
   const getClickedUsersMessages = async () => {
     try {
-      const response = await axios.get(
-        "https://tinder-server.vercel.app/messages",
-        {
-          params: { userId: clickedUserId, correspondingUserId: userId },
-        }
-      );
+      const response = await axios.get("http://localhost:8000/messages", {
+        params: { userId: clickedUserId, correspondingUserId: userId },
+      });
       setClickedUsersMessages(response.data);
     } catch (error) {
       console.log(error);

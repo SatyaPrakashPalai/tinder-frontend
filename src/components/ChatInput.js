@@ -20,7 +20,7 @@ function ChatInput({
       message: textArea,
     };
     try {
-      await axios.post("https://tinder-server.vercel.app/message", {
+      await axios.post("http://localhost:8000/message", {
         message,
       });
       getUsersMessages();

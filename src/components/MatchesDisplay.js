@@ -12,12 +12,9 @@ function MatchesDisplay({ matches, setClickedUser }) {
 
   const getMatches = async () => {
     try {
-      const response = await axios.get(
-        "https://tinder-server.vercel.app/users",
-        {
-          params: { userIds: JSON.stringify(matchedUserIds) },
-        }
-      );
+      const response = await axios.get("http://localhost:8000/users", {
+        params: { userIds: JSON.stringify(matchedUserIds) },
+      });
       setMatchedProfiles(response.data);
     } catch (error) {
       console.log(error);
@@ -26,7 +23,7 @@ function MatchesDisplay({ matches, setClickedUser }) {
 
   useEffect(() => {
     getMatches();
-  }, []);
+  }, [matches]);
 
   const filteredMatchedProfiles = matchedProfiles?.filter(
     (matchedProfile) =>
