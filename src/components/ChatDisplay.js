@@ -44,7 +44,7 @@ function ChatDisplay({ user, clickedUser }) {
     const interval = setInterval(() => {
       getUsersMessages();
       getClickedUsersMessages();
-    }, 50);
+    }, 500);
 
     // Clean up the interval when component unmounts
     return () => {
