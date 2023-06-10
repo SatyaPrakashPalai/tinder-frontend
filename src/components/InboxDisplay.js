@@ -18,9 +18,12 @@ function InboxDisplay({ friends, getUser }) {
 
   const getInvitedUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/inviteusers", {
-        params: { userIds: JSON.stringify(friendUserIds) },
-      });
+      const response = await axios.get(
+        "https://tinder-server.vercel.app/inviteusers",
+        {
+          params: { userIds: JSON.stringify(friendUserIds) },
+        }
+      );
       console.log("resposnse", response.data);
       setInvites(response.data);
     } catch (error) {
@@ -33,10 +36,13 @@ function InboxDisplay({ friends, getUser }) {
       prevInvites.filter((invite) => invite.user_id !== addFriend)
     );
     try {
-      const response = await axios.put("http://localhost:8000/addmatch", {
-        userId: userId,
-        friendId: addFriend,
-      });
+      const response = await axios.put(
+        "https://tinder-server.vercel.app/addmatch",
+        {
+          userId: userId,
+          friendId: addFriend,
+        }
+      );
       // Remove the invite from the state
 
       console.log("in invite", invites);
@@ -50,10 +56,13 @@ function InboxDisplay({ friends, getUser }) {
       prevInvites.filter((invite) => invite.user_id !== addFriend)
     );
     try {
-      const response = await axios.put("http://localhost:8000/removerequest", {
-        userId: userId,
-        friendId: addFriend,
-      });
+      const response = await axios.put(
+        "https://tinder-server.vercel.app/removerequest",
+        {
+          userId: userId,
+          friendId: addFriend,
+        }
+      );
       // Remove the invite from the state
 
       console.log("in invite", invites);

@@ -17,11 +17,14 @@ function GoogleButton({ isSignUp }) {
         const email = result.user.email;
         const userId = result.user.uid;
         const token = (await result.user.getIdTokenResult()).token;
-        const response = await axios.post("http://localhost:8000/signup", {
-          token,
-          email,
-          userId,
-        });
+        const response = await axios.post(
+          "https://tinder-server.vercel.app/signup",
+          {
+            token,
+            email,
+            userId,
+          }
+        );
 
         setCookie("Email", email);
         setCookie("UserId", userId);

@@ -20,9 +20,12 @@ function Dashboard() {
 
   const getUser = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/user", {
-        params: { userId },
-      });
+      const response = await axios.get(
+        "https://tinder-server.vercel.app/user",
+        {
+          params: { userId },
+        }
+      );
       setUser(response.data);
     } catch (error) {
       console.log(error);
@@ -31,9 +34,12 @@ function Dashboard() {
 
   const getGenderedUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/gendered-users", {
-        params: { gender: user?.gender_interest },
-      });
+      const response = await axios.get(
+        "https://tinder-server.vercel.app/gendered-users",
+        {
+          params: { gender: user?.gender_interest },
+        }
+      );
 
       setGenderedUsers(response.data);
     } catch (error) {
@@ -50,7 +56,7 @@ function Dashboard() {
 
   const addFriend = async (matchedUserId) => {
     try {
-      await axios.put("http://localhost:8000/addfriend", {
+      await axios.put("https://tinder-server.vercel.app/addfriend", {
         userId,
         matchedUserId,
       });
