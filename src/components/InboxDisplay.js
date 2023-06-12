@@ -76,29 +76,33 @@ function InboxDisplay({ friends, getUser }) {
 
   return (
     <div className={styles["inbox-display"]}>
-      {invites?.map((match, _index) => (
-        <div key={match.user_id} className={styles["friend-request"]}>
-          <Avatar user={match} />
-          <div className={styles["button-contianer"]}>
-            <IconButton
-              onClick={() => {
-                handleAdd(match.user_id);
-                getUser();
-              }}
-            >
-              <CheckCircleIcon />
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                handleRemove(match.user_id);
-                getUser();
-              }}
-            >
-              <CancelIcon />
-            </IconButton>
+      {!invites ? (
+        invites?.map((match, _index) => (
+          <div key={match.user_id} className={styles["friend-request"]}>
+            <Avatar user={match} />
+            <div className={styles["button-contianer"]}>
+              <IconButton
+                onClick={() => {
+                  handleAdd(match.user_id);
+                  getUser();
+                }}
+              >
+                <CheckCircleIcon />
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  handleRemove(match.user_id);
+                  getUser();
+                }}
+              >
+                <CancelIcon />
+              </IconButton>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <h3 style={{ textAlign: "center" }}>Empty</h3>
+      )}
     </div>
   );
 }

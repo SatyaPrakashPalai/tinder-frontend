@@ -25,13 +25,21 @@ function ChatContainer({ user, getUser }) {
     <div className={styles["chat-container"]}>
       <ChatHeader user={user} />
       <div>
-        <button className={styles["option"]} onClick={handleMatch}>
+        <button
+          className={styles["option"]}
+          onClick={handleMatch}
+          // disabled={!display}
+        >
           Matches
         </button>
         <button className={styles["option"]} disabled={!clickedUser}>
           Chat
         </button>
-        <button className={styles["option"]} onClick={handleInbox}>
+        <button
+          className={styles["option"]}
+          onClick={handleInbox}
+          disabled={display}
+        >
           Inbox
         </button>
       </div>
