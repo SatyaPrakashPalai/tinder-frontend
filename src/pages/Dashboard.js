@@ -104,7 +104,7 @@ function Dashboard() {
             flexDirection: "column",
           }}
         >
-          <Header />
+          // <Header />
 
           <div style={{ display: "flex", height: "100%" }}>
             <ChatContainer user={user} getUser={getUser} />
