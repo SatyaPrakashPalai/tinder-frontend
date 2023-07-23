@@ -47,11 +47,11 @@ function Dashboard() {
     }
   };
 
-  useEffect(() => {
-    getUser();
-    const interval = setInterval(() => {
-      getUser();
-    }, 500);
+  // useEffect(() => {
+  //   getUser();
+  //   const interval = setInterval(() => {
+  //     getUser();
+  //   }, 500);
 
     // Clean up the interval when component unmounts
     return () => {
@@ -68,7 +68,7 @@ function Dashboard() {
         userId,
         matchedUserId,
       });
-      
+      getUser();      
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +77,7 @@ function Dashboard() {
   const swiped = (direction, swipedUserId) => {
     if (direction === "right") {
       addFriend(swipedUserId);
-      
+      getUser();
     }
     setLastDirection(direction);
   };
