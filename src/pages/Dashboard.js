@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import TinderCard from "react-tinder-card";
 import ChatContainer from "../components/ChatContainer";
+import TinderCard from "react-tinder-card";
 import "./TinderCards.css";
 import Header from "../components/Header";
-import { collection, getDocs } from "firebase/firestore";
-import db from "../firebase";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
@@ -68,7 +66,7 @@ function Dashboard() {
         userId,
         matchedUserId,
       });
-      getUser();      
+      getUser();
     } catch (error) {
       console.log(error);
     }
@@ -104,7 +102,7 @@ function Dashboard() {
             flexDirection: "column",
           }}
         >
-          // <Header />
+          {/* <Header /> */}
 
           <div style={{ display: "flex", height: "100%" }}>
             <ChatContainer user={user} getUser={getUser} />
