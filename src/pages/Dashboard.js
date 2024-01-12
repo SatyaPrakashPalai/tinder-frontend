@@ -111,22 +111,22 @@ function Dashboard() {
             <div style={{ width: "100%" }}>
               {/* <p>you swiped {lastDirection}</p> */}
               <div className="tinder__cardContainer">
-                {filteredGenderedUsers?.map((genderedUser) => (
-                  // <TinderCard
-                  //   className="swipe"
-                  //   key={genderedUser.user_id}
-                  //   preventSwipe={["up", "down"]}
-                  //   onSwipe={(dir) => swiped(dir, genderedUser.user_id)}
-                  //   onCardLeftScreen={() => outOfFrame(genderedUser.first_name)}
-                  // >
-                    <div
-                      style={{ backgroundImage: `url(${genderedUser.url})` }}
-                      className="card"
-                    >
-                      <h3>{genderedUser.first_name}</h3>
-                    </div>
-                  </TinderCard>
-                ))}
+                // {filteredGenderedUsers?.map((genderedUser) => (
+                //   <TinderCard
+                //     className="swipe"
+                //     key={genderedUser.user_id}
+                //     preventSwipe={["up", "down"]}
+                //     onSwipe={(dir) => swiped(dir, genderedUser.user_id)}
+                //     onCardLeftScreen={() => outOfFrame(genderedUser.first_name)}
+                //   >
+                //     <div
+                //       style={{ backgroundImage: `url(${genderedUser.url})` }}
+                //       className="card"
+                //     >
+                //       <h3>{genderedUser.first_name}</h3>
+                //     </div>
+                //   </TinderCard>
+                // ))}
               </div>
             </div>
           </div>
