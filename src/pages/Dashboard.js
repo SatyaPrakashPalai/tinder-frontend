@@ -77,7 +77,7 @@ function Dashboard() {
       addFriend(swipedUserId);
       getUser();
     }
-    setLastDirection(direction);
+    setUser((prevUsers) => prevUsers.filter((user) => user.user_id !== userId));
   };
 
   const outOfFrame = (name) => {
@@ -114,7 +114,9 @@ function Dashboard() {
                     className="swipe"
                     key={genderedUser.user_id}
                     preventSwipe={["up", "down"]}
-                    onSwipe={(dir) => swiped(dir, genderedUser.user_id)}
+                    onCardRightScreen={(dir) =>
+                      swiped(dir, genderedUser.user_id)
+                    }
                     onCardLeftScreen={() => outOfFrame(genderedUser.first_name)}
                   >
                     <div
