@@ -1,11 +1,13 @@
+import {lazy} from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SignUp from "./pages/SignUp";
-import OnBoarding from "./pages/OnBoarding";
 import Header from "./components/Header";
 import { useCookies } from "react-cookie";
-import Dashboard from "./pages/Dashboard";
-import ChatContainer from "./components/ChatContainer";
+
+const SignUp = lazy(() => {"./pages/SignUp";});
+const OnBoarding = lazy(() => {"./pages/OnBoarding";});
+const DashBoard = lazy(() => {"./pages/DashBoard";});
+const ChatContainer = lazy(() => {"./components/ChatContainer";});
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
