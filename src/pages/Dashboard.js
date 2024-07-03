@@ -74,6 +74,7 @@ function Dashboard() {
   };
 
   const loved = () => {
+    console.log(currentProfile.user_id);
     addFriend(currentProfile.user_id);
     const newQueue = queue.slice(1);
     setQueue(newQueue);
@@ -84,6 +85,7 @@ function Dashboard() {
   };
 
   const notInterested = () => {
+    console.log(currentProfile.user_id);
     const newQueue = queue.slice(1);
     setQueue(newQueue);
     setCurrentProfile(newQueue[0]);

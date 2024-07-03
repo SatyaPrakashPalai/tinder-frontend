@@ -76,7 +76,7 @@ function InboxDisplay({ friends, getUser }) {
 
   return (
     <div className={styles["inbox-display"]}>
-      {!invites ? (
+      {invites ? (
         invites?.map((match, _index) => (
           <div key={match.user_id} className={styles["friend-request"]}>
             <Avatar user={match} />
