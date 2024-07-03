@@ -4,7 +4,6 @@ import { useCookies } from "react-cookie";
 
 import "./App.css";
 import Loader from "./components/Loader";
-import ProfileCard from "./components/ProfileCard";
 
 const SignUp = lazy(() => delayLoad(import("./pages/SignUp")));
 const OnBoarding = lazy(() => delayLoad(import("./pages/OnBoarding")));

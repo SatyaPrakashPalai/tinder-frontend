@@ -10,7 +10,7 @@ function Dashboard() {
   const [currentProfile, setCurrentProfile] = useState(null);
   const [user, setUser] = useState(null);
 
-  //cookies
+  // cookies
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const userId = cookies.UserId;
 
@@ -78,17 +78,23 @@ function Dashboard() {
     const newQueue = queue.slice(1);
     setQueue(newQueue);
     setCurrentProfile(newQueue[0]);
+    if (newQueue.length === 0) {
+      getGenderedUsers();
+    }
   };
 
   const notInterested = () => {
     const newQueue = queue.slice(1);
     setQueue(newQueue);
     setCurrentProfile(newQueue[0]);
+    if (newQueue.length === 0) {
+      getGenderedUsers();
+    }
   };
 
   return (
     <>
-      {user && currentProfile && (
+      {user && (
         <div
           style={{
             height: "100vh",
@@ -101,17 +107,22 @@ function Dashboard() {
           <div style={{ display: "flex", height: "100%" }}>
             <ChatContainer user={user} getUser={getUser} />
             <div style={{ width: "100%" }}>
-              {/* <p>you swiped {lastDirection}</p> */}
               <div className="tinder__cardContainer">
-                <ProfileCard
-                  className="swipe"
-                  key={currentProfile.user_id}
-                  url={currentProfile.url}
-                  name={currentProfile.first_name}
-                  describ={currentProfile.about}
-                  loved={loved}
-                  notInterested={notInterested}
-                />
+                {currentProfile ? (
+                  <ProfileCard
+                    className="swipe"
+                    key={currentProfile.user_id}
+                    url={currentProfile.url}
+                    name={currentProfile.first_name}
+                    describ={currentProfile.about}
+                    loved={loved}
+                    notInterested={notInterested}
+                  />
+                ) : (
+                  <div className="no-more-profiles">
+                    <h2>Loading more profiles...</h2>
+                  </div>
+                )}
               </div>
             </div>
           </div>
