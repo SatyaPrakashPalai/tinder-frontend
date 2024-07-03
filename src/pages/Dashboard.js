@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ChatContainer from "../components/ChatContainer";
-import TinderCard from "react-tinder-card";
-import "./TinderCards.css";
-import Header from "../components/Header";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import ProfileCard from "../components/ProfileCard";
+import "./TinderCards.css";
 
 function Dashboard() {
-  const [people, setPeople] = useState([]);
+  const [queue, setQueue] = useState([]);
+  const [currentProfile, setCurrentProfile] = useState(null);
   const [user, setUser] = useState(null);
-  const [genderedUsers, setGenderedUsers] = useState(null);
-  const [lastDirection, setLastDirection] = useState();
 
   //cookies
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -38,8 +36,17 @@ function Dashboard() {
           params: { gender: user?.gender_interest },
         }
       );
+      const genderedUsers = response.data;
+      const matchedUserIds = user?.matches
+        ?.map(({ user_id }) => user_id)
+        .concat(userId);
 
-      setGenderedUsers(response.data);
+      const filteredGenderedUsers = genderedUsers.filter(
+        (genderedUser) => !matchedUserIds.includes(genderedUser.user_id)
+      );
+
+      setQueue(filteredGenderedUsers);
+      setCurrentProfile(filteredGenderedUsers[0]);
     } catch (error) {
       console.log(error);
     }
@@ -47,17 +54,12 @@ function Dashboard() {
 
   useEffect(() => {
     getUser();
-    const interval = setInterval(() => {
-      getUser();
-    }, 500);
-
-    // Clean up the interval when component unmounts
-    return () => {
-      clearInterval(interval);
-    };
   }, []);
+
   useEffect(() => {
-    getGenderedUsers();
+    if (user) {
+      getGenderedUsers();
+    }
   }, [user]);
 
   const addFriend = async (matchedUserId) => {
@@ -66,35 +68,27 @@ function Dashboard() {
         userId,
         matchedUserId,
       });
-      getUser();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const swiped = (direction, swipedUserId) => {
-    if (direction === "right") {
-      addFriend(swipedUserId);
-      getUser();
-    }
-    setUser((prevUsers) => prevUsers.filter((user) => user.user_id !== userId));
+  const loved = () => {
+    addFriend(currentProfile.user_id);
+    const newQueue = queue.slice(1);
+    setQueue(newQueue);
+    setCurrentProfile(newQueue[0]);
   };
 
-  const outOfFrame = (name) => {
-    console.log(name + " left the screen!");
+  const notInterested = () => {
+    const newQueue = queue.slice(1);
+    setQueue(newQueue);
+    setCurrentProfile(newQueue[0]);
   };
-
-  const matchedUserIds = user?.matches
-    ?.map(({ user_id }) => user_id)
-    .concat(userId);
-
-  const filteredGenderedUsers = genderedUsers?.filter(
-    (genderedUsers) => !matchedUserIds.includes(genderedUsers.user_id)
-  );
 
   return (
     <>
-      {user && (
+      {user && currentProfile && (
         <div
           style={{
             height: "100vh",
@@ -109,24 +103,15 @@ function Dashboard() {
             <div style={{ width: "100%" }}>
               {/* <p>you swiped {lastDirection}</p> */}
               <div className="tinder__cardContainer">
-                {filteredGenderedUsers?.map((genderedUser) => (
-                  <TinderCard
-                    className="swipe"
-                    key={genderedUser.user_id}
-                    preventSwipe={["up", "down"]}
-                    onCardRightScreen={(dir) =>
-                      swiped(dir, genderedUser.user_id)
-                    }
-                    onCardLeftScreen={() => outOfFrame(genderedUser.first_name)}
-                  >
-                    <div
-                      style={{ backgroundImage: `url(${genderedUser.url})` }}
-                      className="card"
-                    >
-                      <h3>{genderedUser.first_name}</h3>
-                    </div>
-                  </TinderCard>
-                ))}
+                <ProfileCard
+                  className="swipe"
+                  key={currentProfile.user_id}
+                  url={currentProfile.url}
+                  name={currentProfile.first_name}
+                  describ={currentProfile.about}
+                  loved={loved}
+                  notInterested={notInterested}
+                />
               </div>
             </div>
           </div>

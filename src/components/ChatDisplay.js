@@ -85,6 +85,7 @@ function ChatDisplay({ user, clickedUser }) {
         display: "flex",
         flexDirection: "column",
         height: "100%",
+        overflowY: "auto",
       }}
     >
       <Chat

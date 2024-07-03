@@ -31,16 +31,16 @@ function ChatInput({
     }
   };
   return (
-    <div className={styles["chat-input"]}>
-      <textarea
+    <div className={styles["chat-footer"]}>
+      <input
+        placeholder="Type your message"
+        type="text"
         value={textArea}
         onChange={(e) => {
           setTextArea(e.target.value);
         }}
       />
-      <button className={styles["secondary-button"]} onClick={addMessage}>
-        submit
-      </button>
+      <button onClick={addMessage}>Send</button>
     </div>
   );
 }

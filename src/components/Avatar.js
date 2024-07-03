@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./avatar.module.css";
+
 function Avatar({ user }) {
   const colors = [
     "azure",
@@ -13,23 +14,41 @@ function Avatar({ user }) {
   const isHexadecimal = /^[0-9a-fA-F]+$/.test(user.user_id);
   const userIdBase10 = isHexadecimal ? parseInt(user.user_id, 16) : 0;
   const colorIndex = userIdBase10 % colors.length;
-  console.log(colorIndex);
   const color = colors[colorIndex];
-  console.log(color);
+
+  const [imageLoadingError, setImageLoadingError] = useState(false);
+
+  const isValidImageUrl = (url) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = url;
+    });
+  };
+
+  const displayAvatarOrImage = async () => {
+    if (user?.url) {
+      const isValidImage = await isValidImageUrl(user.url);
+      setImageLoadingError(!isValidImage);
+    }
+  };
+
+  useState(() => {
+    displayAvatarOrImage();
+  }, [user?.url]);
 
   return (
     <div className={styles["match-card"]}>
-      {user?.url && (
+      {!imageLoadingError ? (
         <div className={styles["img-container"]}>
           <img
             style={{ width: "100%" }}
             src={user?.url}
-            alt={user?.first_name + "profile"}
+            alt={`${user?.first_name} profile`}
           />
         </div>
-      )}
-
-      {!user?.url && (
+      ) : (
         <div
           className={styles["text-container"]}
           style={{ backgroundColor: color }}
