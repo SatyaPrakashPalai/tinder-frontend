@@ -14,16 +14,19 @@ function ChatInput({
   const clickUserId = clickedUser?.user_id;
 
   const addMessage = async () => {
+    if (!textArea.trim()) {
+      return; // Do not send empty messages
+    }
+
     const message = {
       timestamp: new Date().toISOString(),
       from_userId: userId,
       to_userId: clickUserId,
       message: textArea,
     };
+
     try {
-      await axios.post(`${config.apiUrl}/chat/message`, {
-        message,
-      });
+      await axios.post(`${config.apiUrl}/chat/message`, { message });
       getUsersMessages();
       getClickedUserMessages();
       setTextArea("");
@@ -31,15 +34,22 @@ function ChatInput({
       console.log(error);
     }
   };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Prevents the default behavior of pressing Enter (e.g., new line)
+      addMessage();
+    }
+  };
+
   return (
     <div className={styles["chat-footer"]}>
       <input
         placeholder="Type your message"
         type="text"
         value={textArea}
-        onChange={(e) => {
-          setTextArea(e.target.value);
-        }}
+        onChange={(e) => setTextArea(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
       <button onClick={addMessage}>Send</button>
     </div>
