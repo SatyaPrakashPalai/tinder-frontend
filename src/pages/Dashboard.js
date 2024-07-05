@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import ChatContainer from "../components/ChatContainer";
+import ChatContainer from "../components/Chats/ChatContainer";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import ProfileCard from "../components/ProfileCard";
+import ProfileCard from "../components/Utils/ProfileCard";
 import "./TinderCards.css";
+import config from "../config";
 
 function Dashboard() {
   const [queue, setQueue] = useState([]);
@@ -16,12 +17,9 @@ function Dashboard() {
 
   const getUser = async () => {
     try {
-      const response = await axios.get(
-        "https://tinder-server.vercel.app/user",
-        {
-          params: { userId },
-        }
-      );
+      const response = await axios.get(`${config.apiUrl}/users/check`, {
+        params: { userId },
+      });
       setUser(response.data);
     } catch (error) {
       console.log(error);
@@ -31,7 +29,7 @@ function Dashboard() {
   const getGenderedUsers = async () => {
     try {
       const response = await axios.get(
-        "https://tinder-server.vercel.app/gendered-users",
+        `${config.apiUrl}/users/gendered-users`,
         {
           params: { gender: user?.gender_interest },
         }
@@ -64,7 +62,7 @@ function Dashboard() {
 
   const addFriend = async (matchedUserId) => {
     try {
-      await axios.put("https://tinder-server.vercel.app/addfriend", {
+      await axios.put(`${config.apiUrl}/users/addfriend`, {
         userId,
         matchedUserId,
       });

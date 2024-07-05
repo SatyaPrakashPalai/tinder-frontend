@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styles from "./chat-container.module.css";
 import ChatHeader from "./ChatHeader";
-import MatchesDisplay from "./MatchesDisplay";
+import MatchesDisplay from "../Inbox/MatchesDisplay";
 import ChatDisplay from "./ChatDisplay";
-import InboxDisplay from "./InboxDisplay";
+import InboxDisplay from "../Inbox/InboxDisplay";
 
 function ChatContainer({ user, getUser }) {
   const [clickedUser, setClickedUser] = useState(null);

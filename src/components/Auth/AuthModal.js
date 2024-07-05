@@ -2,18 +2,10 @@ import React, { useState } from "react";
 import styles from "./auth_modal.module.css";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
-import authLogo from "../images/tinder_logo.png";
+import authLogo from "../../images/tinder_logo.png";
 import GoogleButton from "./GoogleButton";
 
 function AuthModal({ setShowModal, newUser, isSignUp }) {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("clicked");
-  };
-
   return (
     <div className={styles["main-container"]}>
       <div className={styles["authmodal-wrapper"]}>

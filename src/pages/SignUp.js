@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./signup.module.css";
-import Navbar from "../components/Navbar";
-import AuthModal from "../components/AuthModal";
+import Navbar from "../components/UIEssentials/Navbar";
+import AuthModal from "../components/Auth/AuthModal";
 import { useCookies } from "react-cookie";
 
 function SignUp() {

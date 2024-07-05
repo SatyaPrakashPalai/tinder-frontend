@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./inbox-display.module.css";
-import Avatar from "./Avatar";
+import Avatar from "../Utils/Avatar";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { IconButton } from "@mui/material";
+import config from "../../config";
 
 function InboxDisplay({ friends, getUser }) {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -15,12 +16,9 @@ function InboxDisplay({ friends, getUser }) {
 
   const getInvitedUsers = async () => {
     try {
-      const response = await axios.get(
-        "https://tinder-server.vercel.app/inviteusers",
-        {
-          params: { userIds: JSON.stringify(friendUserIds) },
-        }
-      );
+      const response = await axios.get(`${config.apiUrl}/users/inviteusers`, {
+        params: { userIds: JSON.stringify(friendUserIds) },
+      });
       console.log("resposnse", response.data);
       setInvites(response.data);
     } catch (error) {
@@ -33,13 +31,10 @@ function InboxDisplay({ friends, getUser }) {
       prevInvites.filter((invite) => invite.user_id !== addFriend)
     );
     try {
-      const response = await axios.put(
-        "https://tinder-server.vercel.app/addmatch",
-        {
-          userId: userId,
-          friendId: addFriend,
-        }
-      );
+      const response = await axios.put(`${config.apiUrl}/users/addmatch`, {
+        userId: userId,
+        friendId: addFriend,
+      });
       // Remove the invite from the state
 
       console.log("in invite", invites);
@@ -53,13 +48,10 @@ function InboxDisplay({ friends, getUser }) {
       prevInvites.filter((invite) => invite.user_id !== addFriend)
     );
     try {
-      const response = await axios.put(
-        "https://tinder-server.vercel.app/removerequest",
-        {
-          userId: userId,
-          friendId: addFriend,
-        }
-      );
+      const response = await axios.put(`${config.apiUrl}/users/removerequest`, {
+        userId: userId,
+        friendId: addFriend,
+      });
       // Remove the invite from the state
 
       console.log("in invite", invites);

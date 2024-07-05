@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./chat-display.module.css";
+import config from "../../config";
 
 function ChatInput({
   user,
@@ -20,7 +21,7 @@ function ChatInput({
       message: textArea,
     };
     try {
-      await axios.post("https://tinder-server.vercel.app/message", {
+      await axios.post(`${config.apiUrl}/chat/message`, {
         message,
       });
       getUsersMessages();

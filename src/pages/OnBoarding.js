@@ -3,7 +3,8 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./on-boarding.module.css";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/UIEssentials/Navbar";
+import config from "../config";
 
 function OnBoarding() {
   const navigate = useNavigate();
@@ -28,12 +29,9 @@ function OnBoarding() {
     e.preventDefault();
     console.log("submiited");
     try {
-      const response = await axios.put(
-        "https://tinder-server.vercel.app/users",
-        {
-          formData,
-        }
-      );
+      const response = await axios.put(`${config.apiUrl}/users/`, {
+        formData,
+      });
       console.log(response);
 
       const success = response.status === 200;

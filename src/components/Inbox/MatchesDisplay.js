@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import styles from "./matches-display.module.css";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import Avatar from "./Avatar";
+import Avatar from "../Utils/Avatar";
+import config from "../../config";
 
 function MatchesDisplay({ matches, setClickedUser }) {
   const [matchedProfiles, setMatchedProfiles] = useState(null);
@@ -12,12 +13,9 @@ function MatchesDisplay({ matches, setClickedUser }) {
 
   const getMatches = async () => {
     try {
-      const response = await axios.get(
-        "https://tinder-server.vercel.app/users",
-        {
-          params: { userIds: JSON.stringify(matchedUserIds) },
-        }
-      );
+      const response = await axios.get(`${config.apiUrl}/users/`, {
+        params: { userIds: JSON.stringify(matchedUserIds) },
+      });
       setMatchedProfiles(response.data);
     } catch (error) {
       console.log(error);

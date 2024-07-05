@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 import "./App.css";
-import Loader from "./components/Loader";
+import Loader from "./components/UIEssentials/Loader";
 
 const SignUp = lazy(() => delayLoad(import("./pages/SignUp")));
 const OnBoarding = lazy(() => delayLoad(import("./pages/OnBoarding")));
-const Header = lazy(() => import("./components/Header"));
+const Header = lazy(() => import("./components/UIEssentials/Header"));
 const Dashboard = lazy(() => delayLoad(import("./pages/Dashboard")));
-const ChatContainer = lazy(() => import("./components/ChatContainer"));
+const ChatContainer = lazy(() => import("./components/Chats/ChatContainer"));
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);

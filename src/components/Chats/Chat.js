@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./chat-display.module.css";
-import Avatar from "./Avatar";
+import Avatar from "../Utils/Avatar";
 
 function Chat({ user, descendingOrderMessages }) {
   return (

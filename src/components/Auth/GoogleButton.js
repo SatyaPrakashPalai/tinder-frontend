@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import styles from "./google-button.module.css";
-import googleIcon from "../images/google.svg";
-import { auth, provider } from "../firebase";
+import googleIcon from "../../images/google.svg";
+import { auth, provider } from "../../firebase";
 import { signInWithPopup } from "firebase/auth";
+import config from "../../config";
 
 function GoogleButton() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -17,14 +18,11 @@ function GoogleButton() {
         const email = result.user.email;
         const userId = result.user.uid;
         const token = (await result.user.getIdTokenResult()).token;
-        const response = await axios.post(
-          "https://tinder-server.vercel.app/signup",
-          {
-            token,
-            email,
-            userId,
-          }
-        );
+        const response = await axios.post(`${config.apiUrl}users/signup`, {
+          token,
+          email,
+          userId,
+        });
 
         setCookie("Email", email);
         setCookie("UserId", userId);
