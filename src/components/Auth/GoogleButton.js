@@ -18,7 +18,7 @@ function GoogleButton() {
         const email = result.user.email;
         const userId = result.user.uid;
         const token = (await result.user.getIdTokenResult()).token;
-        const response = await axios.post(`${config.apiUrl}users/signup`, {
+        const response = await axios.post(`${config.apiUrl}/users/signup`, {
           token,
           email,
           userId,
